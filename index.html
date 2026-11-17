@@ -1,896 +1,487 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark scroll-smooth">
+<html lang="ar" dir="rtl" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RIKO STORE | متجر ريكو ستور ومنصة اليوتيوبرز 24/7</title>
+  <title>RIKO STORE | المتجر الرسمي المربوط بديسكورد</title>
   <link rel="icon" href="assets/youtube_blue.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Cairo', sans-serif; background: radial-gradient(circle at top center, #0c1426 0%, #05080f 65%); color: #f8fafc; }
-    .glass { background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(56, 189, 248, 0.14); }
-    .neon-blue { box-shadow: 0 0 30px rgba(0, 229, 255, 0.25); }
-    .neon-red { box-shadow: 0 0 25px rgba(229, 9, 20, 0.25); }
-    .text-glow { text-shadow: 0 0 18px rgba(0, 229, 255, 0.65); }
-    .card-hover { transition: all 0.3s cubic-bezier(.25,.8,.25,1); }
-    .card-hover:hover { transform: translateY(-6px); border-color: rgba(0, 229, 255, 0.55); box-shadow: 0 15px 35px rgba(0, 229, 255, 0.15); }
+    body { font-family: 'Cairo', sans-serif; background: #060911; color: #f8fafc; }
+    .glass { background: rgba(15, 23, 42, 0.72); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.08); }
+    .tab-btn { transition: all 0.2s ease; }
+    .tab-btn.active { background: #00E5FF; color: #05080f; font-weight: 900; box-shadow: 0 0 20px rgba(0,229,255,0.3); }
+    .card { background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.08); transition: 0.25s; }
+    .card:hover { border-color: rgba(0,229,255,0.45); transform: translateY(-4px); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- Navbar -->
-  <nav class="sticky top-0 z-50 glass border-b border-cyan-500/20">
-    <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="assets/youtube_blue.jpg" alt="RIKO" class="w-11 h-11 rounded-xl border border-cyan-400/50 neon-blue object-cover">
+  <!-- ==================== 1. VERIFICATION GATE SCREEN ==================== -->
+  <div id="verify-gate" class="fixed inset-0 z-[9999] bg-[#050810] flex items-center justify-center p-4">
+    <div class="glass max-w-md w-full rounded-3xl p-7 md:p-9 border border-cyan-500/30 text-center shadow-2xl" style="box-shadow: 0 0 50px rgba(0,229,255,0.12);">
+      <img src="assets/youtube_blue.jpg" class="w-20 h-20 rounded-2xl mx-auto mb-4 border-2 border-cyan-400 shadow-lg object-cover">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[11px] font-bold mb-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>بوابة التحقق الرسمية المربوطة بديسكورد</span>
+      </div>
+      <h1 class="text-2xl md:text-3xl font-black text-white">مرحباً بك في <span class="text-cyan-400">RIKO STORE</span></h1>
+      <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+        أكمل التحقق السريع باسمك في ديسكورد لفتح المتجر هنا وفتح كافة رومات السيرفر وإعطائك رتبة <b class="text-white">عضو</b> تلقائياً!
+      </p>
+
+      <form id="verify-form" class="mt-6 space-y-3.5 text-right">
         <div>
-          <span class="text-xl md:text-2xl font-black tracking-wide text-white">RIKO <span class="text-cyan-400">STORE</span></span>
-          <span class="block text-[11px] text-cyan-300/80 font-semibold">الـمـتـجـر الـرسـمـي ومـنـصـة الـيـوتـيـوبـرز 24/7</span>
+          <label class="block text-xs font-bold text-slate-300 mb-1">👤 اسم حسابك في ديسكورد (Username)</label>
+          <input id="ver-username" type="text" required placeholder="مثال: ahmed_99" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/15 text-sm text-white focus:border-cyan-400 focus:outline-none">
         </div>
-      </div>
-      <div class="hidden md:flex items-center gap-6 text-sm font-bold">
-        <a href="#youtube-hub" class="text-cyan-400 hover:text-cyan-300 transition">🎬 منصة اليوتيوب</a>
-        <a href="#free-stock" class="text-amber-400 hover:text-amber-300 transition">🎁 الستوك المجاني</a>
-        <a href="#store" class="text-slate-200 hover:text-cyan-400 transition">🛍️ المتجر والخدمات</a>
-        <a href="#showcase" class="text-slate-200 hover:text-cyan-400 transition">🏆 معرض أعمالنا</a>
-        <a href="#tiers" class="text-slate-200 hover:text-cyan-400 transition">👑 رتب اليوتيوبرز</a>
-        <a href="tools.html" class="text-emerald-400 hover:text-emerald-300 transition">🧰 أدوات الديسكورد</a>
-      </div>
-      <a href="#youtube-hub" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-xs md:text-sm font-black shadow-lg">
-        🚀 انشر فيديوك الآن
-      </a>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <header class="relative overflow-hidden py-14 md:py-20 px-4">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6 text-center lg:text-right">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>متصل 24/7 على GitHub Pages • مرتبط مباشرة بديسكورد</span>
-        </div>
-        <h1 class="text-4xl md:text-6xl font-black leading-tight text-white">
-          مـتـجـر <span class="text-cyan-400 text-glow">ريـكـو سـتـور</span><br>
-          ومـنـصـة <span class="text-red-500">الـيـوتـيـوبـرز</span> 👑
-        </h1>
-        <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
-          احصل على أقوى المواقع، البوتات، وحزم البيسي الاحترافية بالدفع المباشر عبر <b>Nitro Gift</b> أو <b>Server Boosts</b> — وشارك فيديوهاتك عبر منصة اليوتيوب لترتقي برتبك تلقائياً في سيرفرنا!
-        </p>
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-          <a href="#youtube-hub" class="px-7 py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-base shadow-xl neon-blue transition">
-            🎬 أضف فيديو يوتيوب
-          </a>
-          <a href="#store" class="px-7 py-3.5 rounded-xl glass hover:bg-white/10 text-white font-bold text-base border border-white/15 transition">
-            🛍️ تصفح المتجر والأسعار
-          </a>
-        </div>
-      </div>
-
-      <div class="flex justify-center">
-        <div class="relative p-3 rounded-3xl glass neon-blue max-w-sm w-full">
-          <img src="assets/youtube_blue.jpg" alt="RIKO YouTube Blue" class="w-full rounded-2xl shadow-2xl">
-          <div class="mt-4 flex items-center justify-between px-2">
-            <div>
-              <div class="text-sm font-black text-white">RIKO YOUTUBE HUB</div>
-              <div class="text-xs text-cyan-400">نظام منع التكرار + ترقية رتب تلقائية</div>
-            </div>
-            <span class="px-3 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs font-black">LIVE</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- YOUTUBE HUB SECTION -->
-  <section id="youtube-hub" class="py-12 px-4 max-w-7xl mx-auto w-full">
-    <div class="glass rounded-3xl p-6 md:p-10 neon-blue border border-cyan-500/30">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 border-b border-white/10 pb-6">
-        <div class="flex items-center gap-4">
-          <img src="assets/youtube_blue.jpg" class="w-16 h-16 rounded-2xl border-2 border-cyan-400 shadow-lg">
-          <div>
-            <h2 class="text-2xl md:text-4xl font-black text-white">🎬 مـنـصـة نـشـر فـيـديـوهـات الـيـوتـيـوب</h2>
-            <p class="text-sm text-cyan-300 mt-1">انشر رابط فيديوك ليظهر في القائمة مع اسمك ويتم إرساله فوراً لروم اليوتيوب بديسكورد وترقية رتبتك!</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <div class="px-4 py-2 rounded-xl bg-slate-900/80 border border-cyan-500/30 text-center">
-            <div class="text-xs text-slate-400">إجمالي الفيديوهات</div>
-            <div id="total-vids-count" class="text-2xl font-black text-cyan-400">0</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Submission Form -->
-      <form id="yt-submit-form" class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-10 bg-slate-950/60 p-5 rounded-2xl border border-white/10">
-        <div class="md:col-span-3">
-          <label class="block text-xs font-bold text-cyan-300 mb-1.5">👤 اسمك في ديسكورد (الشخص المنشود)</label>
-          <input id="yt-author" type="text" required placeholder="مثال: R.K | Ahmed" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/15 text-white text-sm focus:border-cyan-400 focus:outline-none">
-        </div>
-        <div class="md:col-span-4">
-          <label class="block text-xs font-bold text-cyan-300 mb-1.5">📝 عنوان الفيديو</label>
-          <input id="yt-title" type="text" required placeholder="مثال: أقوى شرح تسريع فايف إم 2026" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/15 text-white text-sm focus:border-cyan-400 focus:outline-none">
-        </div>
-        <div class="md:col-span-3">
-          <label class="block text-xs font-bold text-cyan-300 mb-1.5">🔗 رابط فيديو اليوتيوب</label>
-          <input id="yt-url" type="url" required placeholder="https://youtu.be/..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-white/15 text-white text-sm focus:border-cyan-400 focus:outline-none" dir="ltr">
-        </div>
-        <div class="md:col-span-2 flex items-end">
-          <button type="submit" id="yt-submit-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black text-sm shadow-lg transition">
-            🚀 نشر والتحقق
-          </button>
-        </div>
+        <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-white/10 cursor-pointer select-none">
+          <input id="ver-check" type="checkbox" required class="w-5 h-5 accent-cyan-400">
+          <span class="text-xs font-bold text-slate-200">🛡️ أنا إنسان حقيقي وأوافق على قوانين سيرفر ريكو ستور</span>
+        </label>
+        <button type="submit" id="ver-btn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-600 hover:from-cyan-300 hover:to-blue-500 text-slate-950 font-black text-sm shadow-xl transition">
+          ✅ تحقق وافتح المتجر وسيرفر ديسكورد
+        </button>
       </form>
 
-      <div id="yt-alert" class="hidden mb-6 p-4 rounded-xl text-sm font-bold"></div>
-
-      <!-- Published Videos List -->
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-xl font-black text-white">📺 قـائـمـة الـفـيـديـوهـات الـمـنـشـورة</h3>
-        <span class="text-xs text-emerald-400 font-bold">🛡️ محمي بنظام منع التكرار التلقائي</span>
-      </div>
-      <div id="videos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Populated dynamically -->
-      </div>
-    </div>
-  </section>
-
-  <!-- YOUTUBE TIER RANKS -->
-  <section id="tiers" class="py-10 px-4 max-w-7xl mx-auto w-full">
-    <h2 class="text-3xl font-black text-center text-white mb-2">👑 نـظـام رتـب الـيـوتـيـوبـرز الـتـلـقـائـي</h2>
-    <p class="text-center text-slate-400 text-sm mb-8">كلما نشرت فيديوهات أكثر وغير مكررة، يقوم البوت بترقيتك تلقائياً لرتبة أقوى في سيرفر ريكو ستور!</p>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-      <div class="glass p-4 rounded-2xl text-center card-hover border-blue-500/30">
-        <div class="text-3xl mb-1">🎬</div>
-        <div class="font-black text-blue-400 text-sm">يوتيوبر مبتدئ</div>
-        <div class="text-xs text-slate-300 mt-1">1+ فيديو</div>
-      </div>
-      <div class="glass p-4 rounded-2xl text-center card-hover border-orange-500/30">
-        <div class="text-3xl mb-1">🎥</div>
-        <div class="font-black text-orange-400 text-sm">يوتيوبر برونزي</div>
-        <div class="text-xs text-slate-300 mt-1">3+ فيديوهات</div>
-      </div>
-      <div class="glass p-4 rounded-2xl text-center card-hover border-slate-400/30">
-        <div class="text-3xl mb-1">🥈</div>
-        <div class="font-black text-slate-200 text-sm">يوتيوبر فضي</div>
-        <div class="text-xs text-slate-300 mt-1">5+ فيديوهات</div>
-      </div>
-      <div class="glass p-4 rounded-2xl text-center card-hover border-yellow-400/40">
-        <div class="text-3xl mb-1">🥇</div>
-        <div class="font-black text-yellow-400 text-sm">يوتيوبر ذهبي</div>
-        <div class="text-xs text-slate-300 mt-1">10+ فيديوهات</div>
-      </div>
-      <div class="glass p-4 rounded-2xl text-center card-hover border-cyan-400/40">
-        <div class="text-3xl mb-1">💎</div>
-        <div class="font-black text-cyan-400 text-sm">يوتيوبر ماسي</div>
-        <div class="text-xs text-slate-300 mt-1">20+ فيديو</div>
-      </div>
-      <div class="glass p-4 rounded-2xl text-center card-hover border-red-500/50 neon-red">
-        <div class="text-3xl mb-1">👑</div>
-        <div class="font-black text-red-500 text-sm">أسطورة اليوتيوب</div>
-        <div class="text-xs text-slate-300 mt-1">35+ فيديو</div>
-      </div>
-    </div>
-  </section>
-
-  
-  <!-- FREE STOCK DROP SECTION -->
-  <section id="free-stock" class="py-12 px-4 max-w-7xl mx-auto w-full">
-    <div class="glass rounded-3xl p-6 md:p-10 border border-amber-400/30" style="box-shadow: 0 0 30px rgba(245, 158, 11, 0.14);">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 border-b border-white/10 pb-6">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-black mb-2">
-            <span>🔥 كمية محدودة جداً</span>
-            <span>•</span>
-            <span>يُقفل تلقائياً عند النفاذ</span>
-          </div>
-          <h2 class="text-2xl md:text-4xl font-black text-white">🎁 قـسـم الـسـتـوك الـمـجـانـي (FREE STOCK)</h2>
-          <p class="text-sm text-slate-300 mt-1">أدوات مجانية بكمية محدودة (10 تحميلات لكل أداة) — وبعد نفاذ الستوك تصبح حصرية لـ <span class="text-pink-400 font-bold">داعمي البوست (Boosters)</span> فقط! 🚀</p>
-        </div>
-        <button onclick="openStockAdmin()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-amber-400/40 text-amber-300 text-xs font-black transition flex items-center gap-2">
-          <span>⚙️</span>
-          <span>لوحة اختيار وإدارة الستوك (للمالك)</span>
-        </button>
-      </div>
-
-      <!-- Stock Cards Grid -->
-      <div id="stock-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </div>
-  </section>
-
-  <!-- ADMIN STOCK PICKER MODAL -->
-  <div id="stock-admin-modal" class="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass rounded-3xl max-w-3xl w-full max-h-[88vh] overflow-y-auto p-6 md:p-8 border border-amber-400/40">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
-        <h3 class="text-xl font-black text-amber-400">⚙️ لوحة تحكم المالك — اختيار وتعديل الستوك المجاني</h3>
-        <button onclick="closeStockAdmin()" class="px-3 py-1 rounded-lg bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white font-black text-sm">✕</button>
-      </div>
-
-      <!-- Toggle & Edit Existing Tools -->
-      <div class="mb-6">
-        <div class="text-xs font-bold text-slate-300 mb-3">✅ اختر الأدوات التي تريد عرضها في الستوك وعدّل الكمية المتاحة لكل أداة:</div>
-        <div id="admin-stock-list" class="space-y-3"></div>
-      </div>
-
-      <!-- Add New Tool to Stock -->
-      <div class="bg-slate-950/70 p-4 rounded-2xl border border-white/10">
-        <div class="text-sm font-black text-cyan-400 mb-3">➕ إضافة أداة جديدة إلى الستوك المجاني</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <input id="new-st-name" type="text" placeholder="اسم الأداة (مثال: حزمة فريمات Valorant)" class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
-          <input id="new-st-max" type="number" value="10" min="1" max="500" placeholder="عدد الستوك (مثال: 10)" class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
-          <input id="new-st-desc" type="text" placeholder="وصف مختصر للأداة..." class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-xs text-white md:col-span-2">
-          <input id="new-st-url" type="url" dir="ltr" placeholder="رابط التحميل المباشر (https://...)" class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-xs text-white md:col-span-2">
-        </div>
-        <button onclick="addNewStockTool()" class="mt-3 w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition">➕ إضافة الأداة وتفعيلها في الستوك</button>
+      <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+        <span class="text-slate-500">حماية وتوثيق فوري 24/7</span>
+        <button onclick="ownerLoginPrompt()" class="text-amber-400 hover:text-amber-300 font-bold">👑 دخول المالك</button>
       </div>
     </div>
   </div>
 
-  <!-- PUBLIC STORE SECTION -->
-  <section id="store" class="py-12 px-4 max-w-7xl mx-auto w-full">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl md:text-4xl font-black text-white">🛍️ مـتـجـر ريـكـو سـتـور الـعـام</h2>
-      <p class="text-slate-400 text-sm mt-2">الدفع المباشر عبر <span class="text-purple-400 font-bold">Nitro Gift لحساب المالك</span> أو <span class="text-pink-400 font-bold">Server Boosts للسيرفر</span></p>
-      <div class="flex flex-wrap justify-center gap-2 mt-5">
-        <button onclick="filterStore('all')" class="filter-btn px-4 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-black text-xs">الكل</button>
-        <button onclick="filterStore('web')" class="filter-btn px-4 py-1.5 rounded-xl glass text-slate-200 font-bold text-xs">🌐 مواقع ومنصات</button>
-        <button onclick="filterStore('pc')" class="filter-btn px-4 py-1.5 rounded-xl glass text-slate-200 font-bold text-xs">💻 أدوات PC و EXE</button>
-        <button onclick="filterStore('bot')" class="filter-btn px-4 py-1.5 rounded-xl glass text-slate-200 font-bold text-xs">🤖 بوتات ديسكورد</button>
-      </div>
+  <!-- ==================== 2. MAIN CLEAN APP ==================== -->
+  <div id="main-app" class="hidden flex-1 flex flex-col">
+
+    <!-- Top Announcement Bar (Editable by Owner!) -->
+    <div id="top-banner" class="bg-gradient-to-r from-cyan-600/20 via-blue-600/20 to-purple-600/20 border-b border-white/10 text-center py-2 px-4 text-xs font-bold text-cyan-200">
+      🔥 الدفع المباشر عبر Nitro Gift أو Server Boosts • اعمل بوست واحد لفتح خزنة VIP تلقائياً!
     </div>
 
-    <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Product 1 -->
-      <div data-cat="web" class="store-card glass rounded-2xl overflow-hidden card-hover flex flex-col">
-        <img src="assets/riko_movies.png" class="w-full h-48 object-cover">
-        <div class="p-6 flex-1 flex flex-col justify-between">
+    <!-- Clean Navbar -->
+    <nav class="sticky top-0 z-40 glass border-b border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <img src="assets/youtube_blue.jpg" class="w-10 h-10 rounded-xl border border-cyan-400/50 object-cover">
           <div>
-            <span class="text-[11px] font-black px-2.5 py-0.5 rounded bg-red-600/20 text-red-400 border border-red-500/30">منصة أفلام 4K</span>
-            <h3 class="text-xl font-black text-white mt-2">🍿 منصة RIKO MOVIES الكاملة</h3>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">تصميم نتفليكس وفلكسر مطابق 100% مع 4 سيرفرات بث سريع بدون إعلانات وترجمة عربية تلقائية باسم متجرك!</p>
+            <div id="site-brand" class="text-lg md:text-xl font-black text-white">RIKO <span class="text-cyan-400">STORE</span></div>
+            <div class="text-[11px] text-emerald-400 font-bold">✅ موثق: <span id="nav-user">عضو</span></div>
           </div>
-          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="text-xs text-purple-400 font-black">🎁 1x Nitro Gaming</div>
-              <div class="text-[11px] text-pink-400 font-bold">أو 🚀 4x Server Boosts</div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="tools.html" class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-bold border border-cyan-500/25">🧰 أدوات ديسكورد</a>
+          <button id="owner-btn" onclick="openOwnerPanel()" class="px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/40 text-xs font-black">
+            👑 لوحة المالك
+          </button>
+        </div>
+      </div>
+
+      <!-- Clean Minimal Tabs -->
+      <div class="max-w-6xl mx-auto px-4 pb-3 flex items-center gap-2 overflow-x-auto">
+        <button onclick="showSection('store')" id="tbtn-store" class="tab-btn active px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🛍️ المتجر الرسمي</button>
+        <button onclick="showSection('stock')" id="tbtn-stock" class="tab-btn bg-slate-900 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🎁 الستوك المجاني</button>
+        <button onclick="showSection('youtube')" id="tbtn-youtube" class="tab-btn bg-slate-900 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap">🎬 منصة اليوتيوب</button>
+        <button onclick="showSection('owner')" id="tbtn-owner" class="hidden tab-btn bg-amber-500/20 text-amber-300 border border-amber-400/40 px-4 py-2 rounded-xl text-xs font-black whitespace-nowrap">⚙️ تحكم المالك (الموقع + ديسكورد)</button>
+      </div>
+    </nav>
+
+    <!-- CONTENT CONTAINER -->
+    <main class="max-w-6xl mx-auto w-full px-4 py-8 flex-1">
+
+      <!-- TAB 1: PUBLIC STORE -->
+      <section id="sec-store" class="app-sec space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-black text-white">🛍️ متجر ريكو الرسمي</h2>
+            <p class="text-xs text-slate-400 mt-1">أهم المنتجات والمشاريع الجاهزة — الدفع بـ Nitro Gift أو Server Boosts</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="filterProducts('all')" class="px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-black text-xs">الكل</button>
+            <button onclick="filterProducts('web')" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 font-bold text-xs">مواقع</button>
+            <button onclick="filterProducts('pc')" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 font-bold text-xs">أدوات PC</button>
+            <button onclick="filterProducts('bot')" class="px-3 py-1.5 rounded-lg bg-slate-900 text-slate-300 font-bold text-xs">بوتات</button>
+          </div>
+        </div>
+        <div id="store-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </section>
+
+      <!-- TAB 2: FREE STOCK -->
+      <section id="sec-stock" class="app-sec hidden space-y-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-black text-white">🎁 الستوك المجاني (كمية محدودة)</h2>
+          <p class="text-xs text-slate-400 mt-1">10 تحميلات مجانية لكل أداة — وبعد النفاذ تصبح حصرية لداعمي البوست فقط 🚀</p>
+        </div>
+        <div id="stock-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </section>
+
+      <!-- TAB 3: YOUTUBE HUB -->
+      <section id="sec-youtube" class="app-sec hidden space-y-6">
+        <div class="glass rounded-2xl p-6 border border-cyan-500/25 flex flex-col md:flex-row items-center gap-5">
+          <img src="assets/youtube_blue.jpg" class="w-20 h-20 rounded-2xl border-2 border-cyan-400 shadow-lg">
+          <div class="flex-1 text-center md:text-right">
+            <h2 class="text-2xl font-black text-white">🎬 منصة ريكو لليوتيوبرز</h2>
+            <p class="text-xs text-cyan-300 mt-1">انشر فيديوك ليظهر هنا وفي روم اليوتيوب بديسكورد مع فحص منع التكرار وترقية رتبتك تلقائياً (1 → 3 → 5 → 10 → 20 → 35 فيديو)!</p>
+          </div>
+        </div>
+
+        <form id="yt-form" class="glass rounded-2xl p-5 grid grid-cols-1 md:grid-cols-12 gap-3">
+          <input id="yt-title" type="text" required placeholder="📝 عنوان الفيديو..." class="md:col-span-5 px-4 py-3 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+          <input id="yt-url" type="url" dir="ltr" required placeholder="🔗 https://youtu.be/..." class="md:col-span-5 px-4 py-3 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+          <button type="submit" id="yt-btn" class="md:col-span-2 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-sm">🚀 نشر الآن</button>
+        </form>
+        <div id="yt-msg" class="hidden p-3.5 rounded-xl text-xs font-bold"></div>
+        <div id="yt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </section>
+
+      <!-- TAB 4: OWNER FULL CONTROL CENTER (WEBSITE + DISCORD!) -->
+      <section id="sec-owner" class="app-sec hidden space-y-6">
+        <div class="glass rounded-2xl p-6 border border-amber-400/40">
+          <h2 class="text-2xl font-black text-amber-400 mb-1">👑 لوحة تحكم المالك الشاملة (الموقع + سيرفر ديسكورد)</h2>
+          <p class="text-xs text-slate-300">كل تعديل تقوم به هنا ينعكس على الموقع أو يُنفذ فوراً داخل سيرفر ديسكورد عبر البوت!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- DISCORD REMOTE CONTROL -->
+          <div class="glass rounded-2xl p-6 space-y-5 border border-cyan-500/25">
+            <h3 class="text-lg font-black text-cyan-400 border-b border-white/10 pb-2">🤖 التحكم المباشر في سيرفر ديسكورد</h3>
+
+            <!-- Remote Announcement -->
+            <div class="space-y-2">
+              <div class="text-xs font-bold text-white">📢 إرسال إعلان رسمي إلى روم التعاميم (@everyone)</div>
+              <input id="dc-ann-title" type="text" placeholder="عنوان الإعلان..." class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+              <textarea id="dc-ann-text" rows="2" placeholder="نص الإعلان..." class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white"></textarea>
+              <button onclick="dcSendAnnouncement()" class="w-full py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs">🚀 نشر الإعلان في ديسكورد الآن</button>
             </div>
-            <span class="px-3 py-1.5 rounded-lg bg-white/10 text-xs font-bold text-white">اطلب بتذكرة 🎟️</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- Product 2 -->
-      <div data-cat="web" class="store-card glass rounded-2xl overflow-hidden card-hover flex flex-col">
-        <img src="assets/pixflow.png" class="w-full h-48 object-cover">
-        <div class="p-6 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[11px] font-black px-2.5 py-0.5 rounded bg-purple-600/20 text-purple-300 border border-purple-500/30">تطبيق ويب AI</span>
-            <h3 class="text-xl font-black text-white mt-2">🎨 استوديو PixFlow لتعديل الصور</h3>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">محرر صور احترافي يعمل في المتصفح مع فلاتر، فرش رسم، أدوات ذكاء اصطناعي وتصدير عالي الدقة.</p>
-          </div>
-          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="text-xs text-purple-400 font-black">🎁 1x Nitro Gaming</div>
-              <div class="text-[11px] text-pink-400 font-bold">أو 🚀 4x Server Boosts</div>
+            <!-- Remote Role Assignment -->
+            <div class="space-y-2 pt-3 border-t border-white/10">
+              <div class="text-xs font-bold text-white">🏷️ منح رتبة لعضو في ديسكورد</div>
+              <div class="flex gap-2">
+                <input id="dc-role-user" type="text" placeholder="اسم العضو في ديسكورد..." class="flex-1 px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+                <select id="dc-role-key" class="px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+                  <option value="member">👤 عضو</option>
+                  <option value="vip">💎 عميل VIP</option>
+                  <option value="booster">🚀 داعم بوست</option>
+                  <option value="youtuber">🔴 يوتيوبر رسمي</option>
+                </select>
+                <button onclick="dcGiveRole()" class="px-4 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs">منح</button>
+              </div>
             </div>
-            <span class="px-3 py-1.5 rounded-lg bg-white/10 text-xs font-bold text-white">اطلب بتذكرة 🎟️</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- Product 3 -->
-      <div data-cat="web" class="store-card glass rounded-2xl overflow-hidden card-hover flex flex-col">
-        <img src="assets/arena.png" class="w-full h-48 object-cover">
-        <div class="p-6 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[11px] font-black px-2.5 py-0.5 rounded bg-cyan-600/20 text-cyan-300 border border-cyan-500/30">منصة ألعاب</span>
-            <h3 class="text-xl font-black text-white mt-2">🎮 ساحة الترفيه والألعاب (Arena)</h3>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">موقع ألعاب وتحديات تفاعلية جاهز للنشر الفوري على استضافة GitHub 24/7 بمؤثرات صوتية رهيبة.</p>
-          </div>
-          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="text-xs text-purple-400 font-black">🎁 1x Nitro Basic</div>
-              <div class="text-[11px] text-pink-400 font-bold">أو 🚀 2x Server Boosts</div>
+            <!-- Quick Server Actions -->
+            <div class="pt-3 border-t border-white/10 grid grid-cols-3 gap-2">
+              <button onclick="dcQuickAction('lock_chat')" class="py-2.5 rounded-xl bg-red-600/20 border border-red-500/40 text-red-300 font-bold text-xs hover:bg-red-600 hover:text-white">🔒 قفل الشات</button>
+              <button onclick="dcQuickAction('unlock_chat')" class="py-2.5 rounded-xl bg-emerald-600/20 border border-emerald-500/40 text-emerald-300 font-bold text-xs hover:bg-emerald-600 hover:text-white">🔓 فتح الشات</button>
+              <button onclick="dcQuickAction('sync_nicks')" class="py-2.5 rounded-xl bg-purple-600/20 border border-purple-500/40 text-purple-300 font-bold text-xs hover:bg-purple-600 hover:text-white">👑 توحيد R.K</button>
             </div>
-            <span class="px-3 py-1.5 rounded-lg bg-white/10 text-xs font-bold text-white">اطلب بتذكرة 🎟️</span>
+            <div id="dc-cmd-status" class="text-xs font-bold text-emerald-400 hidden"></div>
           </div>
-        </div>
-      </div>
 
-      <!-- Product 4 -->
-      <div data-cat="pc" class="store-card glass rounded-2xl overflow-hidden card-hover flex flex-col">
-        <img src="assets/ticket_banner.jpg" class="w-full h-48 object-cover">
-        <div class="p-6 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[11px] font-black px-2.5 py-0.5 rounded bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">حزمة VIP EXE</span>
-            <h3 class="text-xl font-black text-white mt-2">⚡ خزنة أدوات البيسي و GTA/FiveM</h3>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">ملفات YtdPacker.exe و TextureBuilder.exe و DdsTool.exe + بكج تسريع الفريمات وتقليل البنج الشامل.</p>
-          </div>
-          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="text-xs text-pink-400 font-black">🚀 1x Server Boost (فوري!)</div>
-              <div class="text-[11px] text-purple-400 font-bold">أو 🎁 1x Nitro Basic</div>
+          <!-- WEBSITE & STOCK CONTROL -->
+          <div class="glass rounded-2xl p-6 space-y-5 border border-amber-400/25">
+            <h3 class="text-lg font-black text-amber-400 border-b border-white/10 pb-2">🌐 تعديل الموقع والمتجر والستوك</h3>
+
+            <!-- Edit Banner -->
+            <div class="space-y-2">
+              <div class="text-xs font-bold text-white">✏️ تعديل شريط الإعلان العلوي للموقع</div>
+              <div class="flex gap-2">
+                <input id="web-banner-input" type="text" class="flex-1 px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+                <button onclick="saveSiteBanner()" class="px-4 py-2 rounded-xl bg-amber-400 text-slate-950 font-black text-xs">حفظ</button>
+              </div>
             </div>
-            <span class="px-3 py-1.5 rounded-lg bg-pink-600/30 text-pink-300 text-xs font-black">يفتح تلقائياً 🔓</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- Product 5 -->
-      <div data-cat="bot" class="store-card glass rounded-2xl overflow-hidden card-hover flex flex-col">
-        <img src="assets/youtube_blue.jpg" class="w-full h-48 object-cover">
-        <div class="p-6 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[11px] font-black px-2.5 py-0.5 rounded bg-indigo-600/20 text-indigo-300 border border-indigo-500/30">بوت شامل 24/7</span>
-            <h3 class="text-xl font-black text-white mt-2">🤖 بوت ديسكورد متكامل + داشبورد</h3>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">نظام تذاكر بالأزرار، تقييمات بالمودال، بطاقة ترحيب مخصصة بالصورة، نظام لفلات XP، وربط يوتيوب.</p>
-          </div>
-          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-            <div>
-              <div class="text-xs text-purple-400 font-black">🎁 1x Nitro Gaming</div>
-              <div class="text-[11px] text-pink-400 font-bold">أو 🚀 3x Server Boosts</div>
+            <!-- Manage Free Stock Picker -->
+            <div class="pt-3 border-t border-white/10 space-y-2">
+              <div class="text-xs font-bold text-white">🎁 اختيار وتعبئة أدوات الستوك المجاني</div>
+              <div id="owner-stock-list" class="space-y-2 max-h-48 overflow-y-auto"></div>
             </div>
-            <span class="px-3 py-1.5 rounded-lg bg-white/10 text-xs font-bold text-white">اطلب بتذكرة 🎟️</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- Product 6 -->
-      <div data-cat="pc" class="store-card glass rounded-2xl overflow-hidden card-hover flex flex-col">
-        <div class="w-full h-48 bg-gradient-to-br from-emerald-900/60 to-slate-900 flex flex-col items-center justify-center p-6 text-center">
-          <span class="text-5xl mb-2">🎁</span>
-          <span class="text-emerald-400 font-black text-lg">النسخة المجانية للجميع</span>
-        </div>
-        <div class="p-6 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[11px] font-black px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">مجاني 100%</span>
-            <h3 class="text-xl font-black text-white mt-2">🧹 أدوات تنظيف الرام وتسريع FiveM</h3>
-            <p class="text-xs text-slate-300 mt-2 leading-relaxed">حزمة النسخ الخفيفة المجانية متوفرة للتحميل المباشر داخل روم البرامج المجانية في سيرفرنا.</p>
-          </div>
-          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
-            <div class="text-sm text-emerald-400 font-black">FREE / مجاني</div>
-            <span class="px-3 py-1.5 rounded-lg bg-emerald-600/20 text-emerald-300 text-xs font-bold">متاح في السيرفر</span>
+            <!-- Add Product to Store -->
+            <div class="pt-3 border-t border-white/10 space-y-2">
+              <div class="text-xs font-bold text-white">➕ إضافة منتج جديد للمتجر العام</div>
+              <div class="grid grid-cols-2 gap-2">
+                <input id="np-name" type="text" placeholder="اسم المنتج" class="px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+                <input id="np-price" type="text" placeholder="السعر (مثال: 1x Nitro)" class="px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+                <input id="np-desc" type="text" placeholder="وصف قصير..." class="col-span-2 px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+              </div>
+              <button onclick="addStoreProduct()" class="w-full py-2 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs">➕ إضافة للمتجر</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Footer -->
-  <footer class="mt-auto py-8 border-t border-white/10 text-center text-xs text-slate-400 glass">
-    <div class="font-black text-white text-sm mb-1">RIKO STORE | ريـكـو سـتـور 🛍️</div>
-    <div>جميع الحقوق محفوظة © 2026 • مستضاف مجاناً 24/7 على GitHub Pages</div>
-  </footer>
+    </main>
+
+    <footer class="py-6 text-center text-xs text-slate-500 border-t border-white/5">
+      RIKO STORE &copy; 2026 • مربوط مباشرة بسيرفر ديسكورد 24/7
+    </footer>
+  </div>
 
   <script>
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1572319606968811550/N0ZvTi6QAgynIE9XjaLy7VFXeqRmz0-R8wQIK7P7vKQUL3Bd56sYFiQxmm87Cn0VzELr";
-    const STORAGE_KEY = "riko_youtube_videos_v1";
+    const YT_WEBHOOK = "https://discord.com/api/webhooks/1572319606968811550/N0ZvTi6QAgynIE9XjaLy7VFXeqRmz0-R8wQIK7P7vKQUL3Bd56sYFiQxmm87Cn0VzELr";
+    const BRIDGE_WEBHOOK = "https://discord.com/api/webhooks/1572337431967957003/8-DgjQvia4f3QZDd2txcSe7j2MChy9vdNH0ocWYOh4RFLqB7xZ9XqK_z7dGE1JlxxHek";
+    const OWNER_PIN = "riko2026";
 
-    function extractVideoId(url) {
-      const patterns = [
-        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/
-      ];
-      for (const p of patterns) {
-        const m = url.match(p);
-        if (m) return m[1];
-      }
-      return null;
-    }
+    let currentUser = localStorage.getItem("riko_verified_user") || "";
+    let isOwner = localStorage.getItem("riko_is_owner") === "1";
 
-    function getTierBadge(count) {
-      if (count >= 35) return "👑 أسطورة اليوتيوب";
-      if (count >= 20) return "💎 يوتيوبر ماسي";
-      if (count >= 10) return "🥇 يوتيوبر ذهبي";
-      if (count >= 5)  return "🥈 يوتيوبر فضي";
-      if (count >= 3)  return "🎥 يوتيوبر برونزي";
-      return "🎬 يوتيوبر مبتدئ";
-    }
-
-    function loadVideos() {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      } catch { return []; }
-    }
-
-    function saveVideos(list) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-    }
-
-    function showAlert(msg, isError) {
-      const el = document.getElementById("yt-alert");
-      el.textContent = msg;
-      el.className = "mb-6 p-4 rounded-xl text-sm font-bold " + (isError
-        ? "bg-red-500/20 border border-red-500/40 text-red-300"
-        : "bg-emerald-500/20 border border-emerald-500/40 text-emerald-300");
-      el.classList.remove("hidden");
-    }
-
-    function renderVideos() {
-      const vids = loadVideos();
-      document.getElementById("total-vids-count").textContent = vids.length;
-      const grid = document.getElementById("videos-grid");
-
-      if (vids.length === 0) {
-        grid.innerHTML = '<div class="col-span-full text-center py-10 text-slate-400 text-sm">لا توجد فيديوهات منشورة بعد.. كن أول من ينشر فيديوه ويحصل على رتبة اليوتيوبر! 🎬</div>';
-        return;
-      }
-
-      // Count videos per author
-      const authorCounts = {};
-      vids.forEach(v => {
-        const key = v.author.toLowerCase();
-        authorCounts[key] = (authorCounts[key] || 0) + 1;
-      });
-
-      grid.innerHTML = vids.map(v => {
-        const cnt = authorCounts[v.author.toLowerCase()] || 1;
-        const badge = getTierBadge(cnt);
-        return `
-          <div class="bg-slate-900/80 border border-cyan-500/25 rounded-2xl overflow-hidden card-hover flex flex-col">
-            <a href="https://youtu.be/${v.videoId}" target="_blank" class="relative block group">
-              <img src="https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg" class="w-full h-44 object-cover group-hover:brightness-90 transition">
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-cyan-500/90 flex items-center justify-center text-slate-950 font-black text-xl shadow-xl group-hover:scale-110 transition">▶</div>
-              </div>
-              <span class="absolute top-2 right-2 px-2.5 py-0.5 rounded-lg bg-black/80 text-cyan-300 text-[11px] font-bold">${badge}</span>
-            </a>
-            <div class="p-4 flex-1 flex flex-col justify-between">
-              <h4 class="font-black text-white text-sm line-clamp-2">${v.title}</h4>
-              <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-                <span class="text-cyan-400 font-bold">👤 ${v.author}</span>
-                <span class="text-slate-400">🎬 ${cnt} فيديو</span>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    document.getElementById("yt-submit-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const author = document.getElementById("yt-author").value.trim();
-      const title = document.getElementById("yt-title").value.trim();
-      const url = document.getElementById("yt-url").value.trim();
-
-      const videoId = extractVideoId(url);
-      if (!videoId) {
-        showAlert("❌ رابط اليوتيوب غير صالح! يرجى إدخال رابط فيديو يوتيوب صحيح (مثل https://youtu.be/...)", true);
-        return;
-      }
-
-      const vids = loadVideos();
-      // Anti-Duplicate check
-      if (vids.some(v => v.videoId === videoId)) {
-        showAlert("🚫 هذا الفيديو منشور مسبقاً ومعاد! نظام الحماية يمنع تكرار الفيديوهات.", true);
-        return;
-      }
-
-      const btn = document.getElementById("yt-submit-btn");
-      btn.disabled = true;
-      btn.textContent = "⏳ جارِ الإرسال...";
-
-      const newEntry = {
-        videoId,
-        title,
-        author,
-        url: "https://youtu.be/" + videoId,
-        date: new Date().toLocaleDateString("ar-EG")
-      };
-
-      // Send directly to Discord YouTube Channel via Webhook so the Bot verifies & upgrades rank!
-      try {
-        await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: "RIKO YOUTUBE HUB",
-            content: "[YT_JSON]" + JSON.stringify({ vid: videoId, author: author, title: title })
-          })
-        });
-      } catch (err) {
-        console.error("Webhook note:", err);
-      }
-
-      vids.unshift(newEntry);
-      saveVideos(vids);
-      renderVideos();
-
-    // ==================== FREE STOCK DROP & ADMIN PICKER ====================
-    const STOCK_STORAGE_KEY = "riko_free_stock_v1";
-    const DEFAULT_STOCK_ITEMS = [
-      {
-        id: "toolbox-free",
-        name: "⚡ RIKO TOOLBOX FREE v2.0 (.EXE)",
-        desc: "برنامج البيسي المتكامل: تنظيف Temp، تسريع FiveM، فاحص DNS، منظف RAM، وضغط فيديو ديسكورد تحت 10MB!",
-        url: "https://github.com/foxtopmusic2-boop/riko-store/releases/download/v2.0/RIKO_TOOLBOX_FREE.exe",
-        remaining: 10,
-        max: 10,
-        active: true,
-        badge: "برنامج EXE"
-      },
-      {
-        id: "discord-tools",
-        name: "🎨 حزمة أدوات ديسكورد أونلاين (Embed + Avatar + Soundboard)",
-        desc: "صانع الإمبد والويبهوك، صانع إطارات البروفايل النيونية PNG، مزخرف الرومات، وقاص أصوات الساوندبورد.",
-        url: "tools.html",
-        remaining: 10,
-        max: 10,
-        active: true,
-        badge: "أدوات ويب 24/7"
-      },
-      {
-        id: "fivem-boost",
-        name: "🎮 حزمة تسريع FiveM وتنظيف الرام (Lite Pack)",
-        desc: "أدوات تحسين الفريمات وتقليل التقطيع وتنظيف كاش FiveM بضغطة زر بأمان كامل.",
-        url: "https://github.com/foxtopmusic2-boop/riko-store/releases/download/v2.0/RIKO_TOOLBOX_FREE.exe",
-        remaining: 10,
-        max: 10,
-        active: true,
-        badge: "جيمنج PC"
-      },
-      {
-        id: "server-templates",
-        name: "✨ حزمة قوالب وتصاميم سيرفرات ديسكورد مزخرفة",
-        desc: "قوالب كاملة لمتاجر، سيرفرات جيمنج، ويوتيوبرز مع محرك زخرفة عربية وإنجليزية فوري.",
-        url: "tools.html",
-        remaining: 10,
-        max: 10,
-        active: false,
-        badge: "قوالب جاهزة"
-      }
+    // ---------- DEFAULT DATA ----------
+    const DEFAULT_PRODUCTS = [
+      { id: "p1", cat: "web", name: "🍿 منصة RIKO MOVIES 4K", desc: "تصميم نتفليكس مطابق 100% مع 4 سيرفرات بث سريع وترجمة عربية.", price: "🎁 1x Nitro Gaming أو 🚀 4 Boosts", img: "assets/riko_movies.png" },
+      { id: "p2", cat: "pc",  name: "⚡ RIKO TOOLBOX PRO (.EXE)", desc: "أداة البيسي الشاملة: تسريع فريمات، FiveM، DNS، RAM، وضغط 10MB.", price: "🚀 1x Server Boost (فوري!)", img: "assets/ticket_banner.jpg" },
+      { id: "p3", cat: "bot", name: "🤖 بوت ديسكورد متكامل + موقع", desc: "نظام تحقق، تذاكر بالأزرار، تقييمات، ترحيب مخصص، وربط يوتيوب.", price: "🎁 1x Nitro Gaming أو 🚀 3 Boosts", img: "assets/youtube_blue.jpg" },
+      { id: "p4", cat: "web", name: "🎨 استوديو PixFlow AI", desc: "محرر صور احترافي أونلاين مع فلاتر وفرش وأدوات ذكاء اصطناعي.", price: "🎁 1x Nitro Gaming أو 🚀 4 Boosts", img: "assets/pixflow.png" },
+      { id: "p5", cat: "web", name: "🎮 ساحة الألعاب Arena", desc: "منصة ألعاب وتحديات تفاعلية سريعة جاهزة للاستضافة 24/7.", price: "🎁 1x Nitro Basic أو 🚀 2 Boosts", img: "assets/arena.png" }
     ];
 
-    function loadStock() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STOCK_STORAGE_KEY));
-        if (Array.isArray(saved) && saved.length > 0) return saved;
-      } catch {}
-      return JSON.parse(JSON.stringify(DEFAULT_STOCK_ITEMS));
+    const DEFAULT_STOCK = [
+      { id: "s1", name: "⚡ RIKO TOOLBOX FREE v2.0 (.EXE)", desc: "تنظيف Temp، كاش FiveM، فاحص DNS، ومنظف RAM بواجهة نيون.", url: "https://github.com/foxtopmusic2-boop/riko-store/releases/download/v2.0/RIKO_TOOLBOX_FREE.exe", remaining: 10, max: 10, active: true },
+      { id: "s2", name: "🧰 حزمة أدوات ديسكورد أونلاين", desc: "صانع الإمبد، إطارات البروفايل PNG، مزخرف الرومات، والساوندبورد.", url: "tools.html", remaining: 10, max: 10, active: true },
+      { id: "s3", name: "🎮 حزمة تسريع FiveM الخفيفة", desc: "إعدادات وتحسينات لرفع الفريمات وتقليل التقطيع مجاناً.", url: "https://github.com/foxtopmusic2-boop/riko-store/releases/download/v2.0/RIKO_TOOLBOX_FREE.exe", remaining: 10, max: 10, active: true }
+    ];
+
+    const getLS = (k, def) => { try { return JSON.parse(localStorage.getItem(k)) || def; } catch { return def; } };
+    const setLS = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+
+    async function sendBridge(payload) {
+      await fetch(BRIDGE_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "RIKO WEB BRIDGE", content: "[BRIDGE_JSON]" + JSON.stringify(payload) })
+      });
     }
 
-    function saveStock(items) {
-      localStorage.setItem(STOCK_STORAGE_KEY, JSON.stringify(items));
-    }
-
-    function renderStockGrid() {
-      const items = loadStock().filter(i => i.active);
-      const grid = document.getElementById("stock-grid");
-      if (!grid) return;
-
-      if (items.length === 0) {
-        grid.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400 text-sm">لا توجد أدوات مفعّلة في الستوك حالياً — ترقبوا الدفعة القادمة! 🎁</div>';
-        return;
+    // ---------- VERIFICATION GATE ----------
+    function unlockApp() {
+      document.getElementById("verify-gate").classList.add("hidden");
+      document.getElementById("main-app").classList.remove("hidden");
+      document.getElementById("nav-user").textContent = currentUser || "عضو موثق";
+      const savedBanner = localStorage.getItem("riko_banner_txt");
+      if (savedBanner) document.getElementById("top-banner").textContent = savedBanner;
+      if (isOwner) {
+        document.getElementById("tbtn-owner").classList.remove("hidden");
       }
-
-      grid.innerHTML = items.map(item => {
-        const pct = Math.max(0, Math.min(100, Math.round((item.remaining / item.max) * 100)));
-        const out = item.remaining <= 0;
-        return `
-          <div class="bg-slate-900/80 border ${out ? 'border-pink-500/35' : 'border-amber-400/30'} rounded-2xl p-5 flex flex-col justify-between card-hover">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-black px-2.5 py-0.5 rounded-lg ${out ? 'bg-pink-500/20 text-pink-300' : 'bg-amber-500/20 text-amber-300'}">${item.badge || 'ستوك مجاني'}</span>
-                <span class="text-xs font-black ${out ? 'text-red-400' : 'text-emerald-400'}">📦 المتبقي: ${item.remaining} / ${item.max}</span>
-              </div>
-              <h3 class="text-lg font-black text-white mt-1">${item.name}</h3>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">${item.desc}</p>
-              <!-- Progress Bar -->
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden mt-4">
-                <div class="h-full ${out ? 'bg-red-500' : 'bg-gradient-to-r from-amber-400 to-emerald-400'} transition-all duration-300" style="width: ${pct}%"></div>
-              </div>
-            </div>
-            <div class="mt-5">
-              ${out
-                ? `<button disabled class="w-full py-2.5 rounded-xl bg-pink-600/20 border border-pink-500/40 text-pink-300 font-black text-xs cursor-not-allowed">🔒 نفذ الستوك — متاح لداعمي البوست فقط 🚀</button>`
-                : `<button onclick="claimStockItem('${item.id}')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs shadow-lg transition">📥 احجز وحمّل نسختك المجانية (${item.remaining})</button>`
-              }
-            </div>
-          </div>
-        `;
-      }).join("");
+      renderStore("all");
+      renderStock();
+      renderVideos();
     }
 
-    function claimStockItem(id) {
-      const items = loadStock();
-      const target = items.find(i => i.id === id);
-      if (!target || target.remaining <= 0) return;
-      target.remaining -= 1;
-      saveStock(items);
-      renderStockGrid();
-      window.open(target.url, "_blank");
-    }
-
-    function openStockAdmin() {
-      const pin = prompt("🔐 أدخل رمز المالك لإدارة واختيار أدوات الستوك (الرمز الافتراضي: riko2026):");
-      if (pin !== "riko2026") {
-        if (pin !== null) alert("❌ الرمز غير صحيح!");
-        return;
-      }
-      renderAdminStockList();
-      document.getElementById("stock-admin-modal").classList.remove("hidden");
-    }
-
-    function closeStockAdmin() {
-      document.getElementById("stock-admin-modal").classList.add("hidden");
-    }
-
-    function renderAdminStockList() {
-      const items = loadStock();
-      const box = document.getElementById("admin-stock-list");
-      box.innerHTML = items.map(item => `
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-slate-900 border border-white/10">
-          <div class="flex items-center gap-3">
-            <input type="checkbox" ${item.active ? 'checked' : ''} onchange="toggleStockActive('${item.id}', this.checked)" class="w-5 h-5 accent-amber-400 cursor-pointer">
-            <div>
-              <div class="font-bold text-sm text-white">${item.name}</div>
-              <div class="text-[11px] text-slate-400">الحالة: ${item.active ? '✅ ظاهر في الستوك' : '⛔ مخفي'} • المتبقي: ${item.remaining}/${item.max}</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <input type="number" min="0" max="500" value="${item.remaining}" onchange="updateStockQty('${item.id}', this.value)" class="w-16 px-2 py-1 rounded-lg bg-slate-800 border border-white/15 text-xs text-center text-white font-bold">
-            <button onclick="restockItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-bold hover:bg-emerald-500/30">🔄 تعبئة</button>
-            <button onclick="deleteStockItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500/30">🗑️</button>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function toggleStockActive(id, val) {
-      const items = loadStock();
-      const t = items.find(i => i.id === id);
-      if (t) { t.active = val; saveStock(items); renderStockGrid(); renderAdminStockList(); }
-    }
-
-    function updateStockQty(id, val) {
-      const items = loadStock();
-      const t = items.find(i => i.id === id);
-      if (t) {
-        const n = Math.max(0, parseInt(val) || 0);
-        t.remaining = n;
-        if (n > t.max) t.max = n;
-        saveStock(items); renderStockGrid(); renderAdminStockList();
-      }
-    }
-
-    function restockItem(id) {
-      const items = loadStock();
-      const t = items.find(i => i.id === id);
-      if (t) { t.remaining = t.max; saveStock(items); renderStockGrid(); renderAdminStockList(); }
-    }
-
-    function deleteStockItem(id) {
-      if (!confirm("حذف هذه الأداة من قائمة الستوك؟")) return;
-      const items = loadStock().filter(i => i.id !== id);
-      saveStock(items); renderStockGrid(); renderAdminStockList();
-    }
-
-    function addNewStockTool() {
-      const name = document.getElementById("new-st-name").value.trim();
-      const max = Math.max(1, parseInt(document.getElementById("new-st-max").value) || 10);
-      const desc = document.getElementById("new-st-desc").value.trim() || "أداة حصرية مجانية من ريكو ستور!";
-      const url = document.getElementById("new-st-url").value.trim();
-      if (!name || !url) return alert("يرجى إدخال اسم الأداة ورابط التحميل!");
-      const items = loadStock();
-      items.unshift({ id: "tool-" + Date.now(), name, desc, url, remaining: max, max, active: true, badge: "جديد 🔥" });
-      saveStock(items);
-      renderStockGrid();
-      renderAdminStockList();
-      document.getElementById("new-st-name").value = "";
-      document.getElementById("new-st-desc").value = "";
-      document.getElementById("new-st-url").value = "";
-      alert("✅ تمت إضافة الأداة وتفعيلها في الستوك المجاني!");
-    }
-
-    renderStockGrid();
-
-
-      showAlert(`✅ تم نشر فيديو "${title}" بنجاح باسم ${author} وإرساله لديسكورد للتحقق وترقية رتبتك تلقائياً! 🎉`, false);
-      document.getElementById("yt-submit-form").reset();
-      btn.disabled = false;
-      btn.textContent = "🚀 نشر والتحقق";
+    document.getElementById("verify-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const u = document.getElementById("ver-username").value.trim();
+      if (!u) return;
+      const btn = document.getElementById("ver-btn");
+      btn.disabled = true; btn.textContent = "⏳ جارِ التوثيق والربط بديسكورد...";
+      try { await sendBridge({ action: "verify_user", username: u }); } catch {}
+      currentUser = u;
+      localStorage.setItem("riko_verified_user", u);
+      unlockApp();
     });
 
-    function filterStore(cat) {
-      document.querySelectorAll(".store-card").forEach(card => {
-        if (cat === "all" || card.dataset.cat === cat) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-        }
+    function ownerLoginPrompt() {
+      const p = prompt("👑 أدخل رمز المالك للدخول بصلاحية التحكم الكامل:");
+      if (p === OWNER_PIN) {
+        isOwner = true;
+        currentUser = "👑 المالك (Owner)";
+        localStorage.setItem("riko_is_owner", "1");
+        localStorage.setItem("riko_verified_user", currentUser);
+        unlockApp();
+        showSection("owner");
+      } else if (p !== null) {
+        alert("❌ الرمز غير صحيح!");
+      }
+    }
+
+    function openOwnerPanel() {
+      if (isOwner) { showSection("owner"); }
+      else { ownerLoginPrompt(); }
+    }
+
+    // ---------- SECTION SWITCHER ----------
+    function showSection(key) {
+      document.querySelectorAll(".app-sec").forEach(s => s.classList.add("hidden"));
+      document.getElementById("sec-" + key).classList.remove("hidden");
+      document.querySelectorAll(".tab-btn").forEach(b => {
+        b.classList.remove("active");
+        if (b.id !== "tbtn-owner") b.classList.add("bg-slate-900", "text-slate-300");
       });
-    }
-
-    renderVideos();
-
-    // ==================== FREE STOCK DROP & ADMIN PICKER ====================
-    const STOCK_STORAGE_KEY = "riko_free_stock_v1";
-    const DEFAULT_STOCK_ITEMS = [
-      {
-        id: "toolbox-free",
-        name: "⚡ RIKO TOOLBOX FREE v2.0 (.EXE)",
-        desc: "برنامج البيسي المتكامل: تنظيف Temp، تسريع FiveM، فاحص DNS، منظف RAM، وضغط فيديو ديسكورد تحت 10MB!",
-        url: "https://github.com/foxtopmusic2-boop/riko-store/releases/download/v2.0/RIKO_TOOLBOX_FREE.exe",
-        remaining: 10,
-        max: 10,
-        active: true,
-        badge: "برنامج EXE"
-      },
-      {
-        id: "discord-tools",
-        name: "🎨 حزمة أدوات ديسكورد أونلاين (Embed + Avatar + Soundboard)",
-        desc: "صانع الإمبد والويبهوك، صانع إطارات البروفايل النيونية PNG، مزخرف الرومات، وقاص أصوات الساوندبورد.",
-        url: "tools.html",
-        remaining: 10,
-        max: 10,
-        active: true,
-        badge: "أدوات ويب 24/7"
-      },
-      {
-        id: "fivem-boost",
-        name: "🎮 حزمة تسريع FiveM وتنظيف الرام (Lite Pack)",
-        desc: "أدوات تحسين الفريمات وتقليل التقطيع وتنظيف كاش FiveM بضغطة زر بأمان كامل.",
-        url: "https://github.com/foxtopmusic2-boop/riko-store/releases/download/v2.0/RIKO_TOOLBOX_FREE.exe",
-        remaining: 10,
-        max: 10,
-        active: true,
-        badge: "جيمنج PC"
-      },
-      {
-        id: "server-templates",
-        name: "✨ حزمة قوالب وتصاميم سيرفرات ديسكورد مزخرفة",
-        desc: "قوالب كاملة لمتاجر، سيرفرات جيمنج، ويوتيوبرز مع محرك زخرفة عربية وإنجليزية فوري.",
-        url: "tools.html",
-        remaining: 10,
-        max: 10,
-        active: false,
-        badge: "قوالب جاهزة"
+      const btn = document.getElementById("tbtn-" + key);
+      if (btn) { btn.classList.add("active"); btn.classList.remove("bg-slate-900", "text-slate-300"); }
+      if (key === "owner") {
+        document.getElementById("web-banner-input").value = document.getElementById("top-banner").textContent.trim();
+        renderOwnerStock();
       }
-    ];
-
-    function loadStock() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STOCK_STORAGE_KEY));
-        if (Array.isArray(saved) && saved.length > 0) return saved;
-      } catch {}
-      return JSON.parse(JSON.stringify(DEFAULT_STOCK_ITEMS));
     }
 
-    function saveStock(items) {
-      localStorage.setItem(STOCK_STORAGE_KEY, JSON.stringify(items));
-    }
-
-    function renderStockGrid() {
-      const items = loadStock().filter(i => i.active);
-      const grid = document.getElementById("stock-grid");
-      if (!grid) return;
-
-      if (items.length === 0) {
-        grid.innerHTML = '<div class="col-span-full text-center py-8 text-slate-400 text-sm">لا توجد أدوات مفعّلة في الستوك حالياً — ترقبوا الدفعة القادمة! 🎁</div>';
-        return;
-      }
-
-      grid.innerHTML = items.map(item => {
-        const pct = Math.max(0, Math.min(100, Math.round((item.remaining / item.max) * 100)));
-        const out = item.remaining <= 0;
-        return `
-          <div class="bg-slate-900/80 border ${out ? 'border-pink-500/35' : 'border-amber-400/30'} rounded-2xl p-5 flex flex-col justify-between card-hover">
+    // ---------- STORE ----------
+    function renderStore(cat) {
+      const prods = getLS("riko_store_products", DEFAULT_PRODUCTS);
+      const list = cat === "all" ? prods : prods.filter(p => p.cat === cat);
+      document.getElementById("store-grid").innerHTML = list.map(p => `
+        <div class="card rounded-2xl overflow-hidden flex flex-col">
+          <img src="${p.img || 'assets/ticket_banner.jpg'}" class="w-full h-44 object-cover">
+          <div class="p-5 flex-1 flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] font-black px-2.5 py-0.5 rounded-lg ${out ? 'bg-pink-500/20 text-pink-300' : 'bg-amber-500/20 text-amber-300'}">${item.badge || 'ستوك مجاني'}</span>
-                <span class="text-xs font-black ${out ? 'text-red-400' : 'text-emerald-400'}">📦 المتبقي: ${item.remaining} / ${item.max}</span>
+              <h3 class="text-base font-black text-white">${p.name}</h3>
+              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">${p.desc}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-cyan-400 font-black">${p.price}</span>
+              <span class="px-2.5 py-1 rounded-lg bg-white/10 text-white font-bold">اطلب بتذكرة 🎟️</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+    function filterProducts(cat) { renderStore(cat); }
+
+    // ---------- FREE STOCK ----------
+    function renderStock() {
+      const items = getLS("riko_free_stock_v2", DEFAULT_STOCK).filter(i => i.active);
+      document.getElementById("stock-grid").innerHTML = items.map(i => {
+        const out = i.remaining <= 0;
+        const pct = Math.round((i.remaining / i.max) * 100);
+        return `
+          <div class="card rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between text-xs font-black mb-2">
+                <span class="text-amber-400">🎁 ستوك مجاني</span>
+                <span class="${out ? 'text-red-400' : 'text-emerald-400'}">${i.remaining} / ${i.max}</span>
               </div>
-              <h3 class="text-lg font-black text-white mt-1">${item.name}</h3>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed">${item.desc}</p>
-              <!-- Progress Bar -->
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden mt-4">
-                <div class="h-full ${out ? 'bg-red-500' : 'bg-gradient-to-r from-amber-400 to-emerald-400'} transition-all duration-300" style="width: ${pct}%"></div>
+              <h3 class="font-black text-white text-base">${i.name}</h3>
+              <p class="text-xs text-slate-400 mt-1.5">${i.desc}</p>
+              <div class="w-full h-2 bg-slate-800 rounded-full mt-4 overflow-hidden">
+                <div class="h-full ${out ? 'bg-red-500' : 'bg-amber-400'}" style="width:${pct}%"></div>
               </div>
             </div>
-            <div class="mt-5">
+            <div class="mt-4">
               ${out
-                ? `<button disabled class="w-full py-2.5 rounded-xl bg-pink-600/20 border border-pink-500/40 text-pink-300 font-black text-xs cursor-not-allowed">🔒 نفذ الستوك — متاح لداعمي البوست فقط 🚀</button>`
-                : `<button onclick="claimStockItem('${item.id}')" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs shadow-lg transition">📥 احجز وحمّل نسختك المجانية (${item.remaining})</button>`
+                ? `<button disabled class="w-full py-2.5 rounded-xl bg-pink-600/20 text-pink-300 text-xs font-black">🔒 نفذ الستوك — متاح لداعمي البوست 🚀</button>`
+                : `<button onclick="claimStock('${i.id}')" class="w-full py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black">📥 تحميل مجاني (${i.remaining})</button>`
               }
             </div>
           </div>
         `;
       }).join("");
     }
-
-    function claimStockItem(id) {
-      const items = loadStock();
-      const target = items.find(i => i.id === id);
-      if (!target || target.remaining <= 0) return;
-      target.remaining -= 1;
-      saveStock(items);
-      renderStockGrid();
-      window.open(target.url, "_blank");
+    function claimStock(id) {
+      const items = getLS("riko_free_stock_v2", DEFAULT_STOCK);
+      const t = items.find(i => i.id === id);
+      if (!t || t.remaining <= 0) return;
+      t.remaining -= 1;
+      setLS("riko_free_stock_v2", items);
+      renderStock();
+      window.open(t.url, "_blank");
     }
 
-    function openStockAdmin() {
-      const pin = prompt("🔐 أدخل رمز المالك لإدارة واختيار أدوات الستوك (الرمز الافتراضي: riko2026):");
-      if (pin !== "riko2026") {
-        if (pin !== null) alert("❌ الرمز غير صحيح!");
-        return;
-      }
-      renderAdminStockList();
-      document.getElementById("stock-admin-modal").classList.remove("hidden");
+    // ---------- YOUTUBE HUB ----------
+    function extractVid(u) {
+      const m = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
+      return m ? m[1] : null;
     }
-
-    function closeStockAdmin() {
-      document.getElementById("stock-admin-modal").classList.add("hidden");
-    }
-
-    function renderAdminStockList() {
-      const items = loadStock();
-      const box = document.getElementById("admin-stock-list");
-      box.innerHTML = items.map(item => `
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-slate-900 border border-white/10">
-          <div class="flex items-center gap-3">
-            <input type="checkbox" ${item.active ? 'checked' : ''} onchange="toggleStockActive('${item.id}', this.checked)" class="w-5 h-5 accent-amber-400 cursor-pointer">
-            <div>
-              <div class="font-bold text-sm text-white">${item.name}</div>
-              <div class="text-[11px] text-slate-400">الحالة: ${item.active ? '✅ ظاهر في الستوك' : '⛔ مخفي'} • المتبقي: ${item.remaining}/${item.max}</div>
-            </div>
+    function renderVideos() {
+      const vids = getLS("riko_youtube_videos_v1", []);
+      document.getElementById("yt-grid").innerHTML = vids.length ? vids.map(v => `
+        <a href="https://youtu.be/${v.videoId}" target="_blank" class="card rounded-2xl overflow-hidden block">
+          <img src="https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <div class="font-bold text-sm text-white line-clamp-2">${v.title}</div>
+            <div class="text-xs text-cyan-400 font-bold mt-2">👤 ${v.author}</div>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="number" min="0" max="500" value="${item.remaining}" onchange="updateStockQty('${item.id}', this.value)" class="w-16 px-2 py-1 rounded-lg bg-slate-800 border border-white/15 text-xs text-center text-white font-bold">
-            <button onclick="restockItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-bold hover:bg-emerald-500/30">🔄 تعبئة</button>
-            <button onclick="deleteStockItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500/30">🗑️</button>
-          </div>
+        </a>`).join("") : '<p class="col-span-full text-center text-xs text-slate-400 py-8">كن أول من ينشر فيديو يوتيوب هنا! 🎬</p>';
+    }
+    document.getElementById("yt-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = document.getElementById("yt-title").value.trim();
+      const url = document.getElementById("yt-url").value.trim();
+      const vid = extractVid(url);
+      const msg = document.getElementById("yt-msg");
+      if (!vid) { msg.textContent = "❌ رابط يوتيوب غير صحيح!"; msg.className = "p-3 rounded-xl text-xs font-bold bg-red-500/20 text-red-300"; return; }
+      const vids = getLS("riko_youtube_videos_v1", []);
+      if (vids.some(v => v.videoId === vid)) { msg.textContent = "🚫 هذا الفيديو معاد ومكرر!"; msg.className = "p-3 rounded-xl text-xs font-bold bg-red-500/20 text-red-300"; return; }
+      try {
+        await fetch(YT_WEBHOOK, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: "RIKO YOUTUBE HUB", content: "[YT_JSON]" + JSON.stringify({ vid, author: currentUser, title }) })
+        });
+      } catch {}
+      vids.unshift({ videoId: vid, title, author: currentUser });
+      setLS("riko_youtube_videos_v1", vids);
+      renderVideos();
+      msg.textContent = "✅ تم النشر بنجاح وإرساله لديسكورد للتحقق وترقية رتبتك!";
+      msg.className = "p-3 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300";
+      e.target.reset();
+    });
+
+    // ---------- OWNER PANEL ACTIONS ----------
+    function showDcStatus(txt) {
+      const el = document.getElementById("dc-cmd-status");
+      el.textContent = txt; el.classList.remove("hidden");
+    }
+    async function dcSendAnnouncement() {
+      const title = document.getElementById("dc-ann-title").value.trim();
+      const text = document.getElementById("dc-ann-text").value.trim();
+      if (!text) return alert("اكتب نص الإعلان!");
+      await sendBridge({ action: "announce", pin: OWNER_PIN, title, text });
+      showDcStatus("✅ تم إرسال الإعلان رسمياً إلى سيرفر ديسكورد!");
+      document.getElementById("dc-ann-title").value = ""; document.getElementById("dc-ann-text").value = "";
+    }
+    async function dcGiveRole() {
+      const username = document.getElementById("dc-role-user").value.trim();
+      const role_key = document.getElementById("dc-role-key").value;
+      if (!username) return alert("اكتب اسم العضو!");
+      await sendBridge({ action: "give_role", pin: OWNER_PIN, username, role_key });
+      showDcStatus(`✅ تم إرسال أمر منح الرتبة للعضو ${username} في ديسكورد!`);
+    }
+    async function dcQuickAction(act) {
+      await sendBridge({ action: act, pin: OWNER_PIN });
+      showDcStatus("✅ تم تنفيذ الأمر مباشرة داخل سيرفر ديسكورد!");
+    }
+    function saveSiteBanner() {
+      const txt = document.getElementById("web-banner-input").value.trim();
+      localStorage.setItem("riko_banner_txt", txt);
+      document.getElementById("top-banner").textContent = txt;
+      alert("✅ تم تحديث الشريط العلوي!");
+    }
+    function addStoreProduct() {
+      const name = document.getElementById("np-name").value.trim();
+      const price = document.getElementById("np-price").value.trim();
+      const desc = document.getElementById("np-desc").value.trim();
+      if (!name || !price) return alert("أدخل الاسم والسعر!");
+      const prods = getLS("riko_store_products", DEFAULT_PRODUCTS);
+      prods.unshift({ id: "p-" + Date.now(), cat: "web", name, price, desc: desc || "منتج جديد من ريكو ستور", img: "assets/ticket_banner.jpg" });
+      setLS("riko_store_products", prods);
+      renderStore("all");
+      alert("✅ تمت إضافة المنتج للمتجر!");
+    }
+    function renderOwnerStock() {
+      const items = getLS("riko_free_stock_v2", DEFAULT_STOCK);
+      document.getElementById("owner-stock-list").innerHTML = items.map(i => `
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-900 text-xs">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" ${i.active ? 'checked' : ''} onchange="ownerToggleStock('${i.id}', this.checked)" class="accent-amber-400">
+            <span class="font-bold text-white">${i.name}</span>
+          </label>
+          <button onclick="ownerRestock('${i.id}')" class="px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold">🔄 تعبئة (${i.remaining}/${i.max})</button>
         </div>
       `).join("");
     }
-
-    function toggleStockActive(id, val) {
-      const items = loadStock();
+    function ownerToggleStock(id, val) {
+      const items = getLS("riko_free_stock_v2", DEFAULT_STOCK);
       const t = items.find(i => i.id === id);
-      if (t) { t.active = val; saveStock(items); renderStockGrid(); renderAdminStockList(); }
+      if (t) { t.active = val; setLS("riko_free_stock_v2", items); renderStock(); renderOwnerStock(); }
     }
-
-    function updateStockQty(id, val) {
-      const items = loadStock();
+    function ownerRestock(id) {
+      const items = getLS("riko_free_stock_v2", DEFAULT_STOCK);
       const t = items.find(i => i.id === id);
-      if (t) {
-        const n = Math.max(0, parseInt(val) || 0);
-        t.remaining = n;
-        if (n > t.max) t.max = n;
-        saveStock(items); renderStockGrid(); renderAdminStockList();
-      }
+      if (t) { t.remaining = t.max; setLS("riko_free_stock_v2", items); renderStock(); renderOwnerStock(); }
     }
 
-    function restockItem(id) {
-      const items = loadStock();
-      const t = items.find(i => i.id === id);
-      if (t) { t.remaining = t.max; saveStock(items); renderStockGrid(); renderAdminStockList(); }
-    }
-
-    function deleteStockItem(id) {
-      if (!confirm("حذف هذه الأداة من قائمة الستوك؟")) return;
-      const items = loadStock().filter(i => i.id !== id);
-      saveStock(items); renderStockGrid(); renderAdminStockList();
-    }
-
-    function addNewStockTool() {
-      const name = document.getElementById("new-st-name").value.trim();
-      const max = Math.max(1, parseInt(document.getElementById("new-st-max").value) || 10);
-      const desc = document.getElementById("new-st-desc").value.trim() || "أداة حصرية مجانية من ريكو ستور!";
-      const url = document.getElementById("new-st-url").value.trim();
-      if (!name || !url) return alert("يرجى إدخال اسم الأداة ورابط التحميل!");
-      const items = loadStock();
-      items.unshift({ id: "tool-" + Date.now(), name, desc, url, remaining: max, max, active: true, badge: "جديد 🔥" });
-      saveStock(items);
-      renderStockGrid();
-      renderAdminStockList();
-      document.getElementById("new-st-name").value = "";
-      document.getElementById("new-st-desc").value = "";
-      document.getElementById("new-st-url").value = "";
-      alert("✅ تمت إضافة الأداة وتفعيلها في الستوك المجاني!");
-    }
-
-    renderStockGrid();
-
+    if (currentUser) { unlockApp(); }
   </script>
 </body>
 </html>
