@@ -430,7 +430,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             username: "RIKO YOUTUBE HUB",
-            content: `[YT_SUBMIT]|${videoId}|${author}|${title}|https://youtu.be/${videoId}`
+            content: "[YT_JSON]" + JSON.stringify({ vid: videoId, author: author, title: title })
           })
         });
       } catch (err) {
