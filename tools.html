@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIKO TOOLS | أدوات الديسكورد والبيسي الشاملة 24/7</title>
+  <link rel="icon" href="assets/youtube_blue.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Cairo', sans-serif; background: radial-gradient(circle at top center, #0c1426 0%, #05080f 65%); color: #f8fafc; }
+    .glass { background: rgba(15, 23, 42, 0.72); backdrop-filter: blur(16px); border: 1px solid rgba(56, 189, 248, 0.16); }
+    .neon-cyan { box-shadow: 0 0 25px rgba(0, 229, 255, 0.2); }
+    .tab-active { background: linear-gradient(90deg, #06b6d4, #2563eb); color: #fff !important; box-shadow: 0 0 20px rgba(6, 182, 212, 0.35); }
+    .discord-bg { background-color: #313338; }
+    .discord-embed { background-color: #2b2d31; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 glass border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="assets/youtube_blue.jpg" class="w-10 h-10 rounded-xl border border-cyan-400/50 object-cover">
+        <div>
+          <span class="text-xl font-black text-white">RIKO <span class="text-cyan-400">TOOLS</span></span>
+          <span class="block text-[11px] text-cyan-300/80 font-semibold">حزمة أدوات ديسكورد والبيسي أونلاين 24/7</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-4 py-2 rounded-xl glass hover:bg-white/10 text-xs font-bold text-slate-200 transition">🏠 المتجر ومنصة اليوتيوب</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Tabs Bar -->
+  <div class="max-w-7xl mx-auto w-full px-4 pt-8 pb-4">
+    <div class="text-center mb-6">
+      <h1 class="text-3xl md:text-5xl font-black text-white">🧰 حـزمـة أدوات <span class="text-cyan-400">ديـسـكـورد والـبـيـسـي</span></h1>
+      <p class="text-slate-400 text-sm mt-2">جميع الأدوات تعمل مباشرة في المتصفح مجاناً وبأعلى سرعة + تحميل مباشر لبرنامج RIKO TOOLBOX للبيسي!</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2.5">
+      <button onclick="switchTool('embed')" id="tab-embed" class="tool-tab tab-active px-5 py-2.5 rounded-xl font-black text-xs md:text-sm transition">🎨 صانع الإمبد والويبهوك</button>
+      <button onclick="switchTool('avatar')" id="tab-avatar" class="tool-tab glass px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm text-slate-300 transition">🖼️ صانع إطارات البروفايل</button>
+      <button onclick="switchTool('decorator')" id="tab-decorator" class="tool-tab glass px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm text-slate-300 transition">✨ مزخرف وقوالب السيرفرات</button>
+      <button onclick="switchTool('soundboard')" id="tab-soundboard" class="tool-tab glass px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm text-slate-300 transition">🎙️ قاص أصوات الساوندبورد</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto w-full px-4 pb-16 flex-1">
+
+    <!-- TOOL 1: DISCORD EMBED & WEBHOOK BUILDER -->
+    <section id="panel-embed" class="tool-panel glass rounded-3xl p-6 md:p-8 neon-cyan">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Editor -->
+        <div class="space-y-4">
+          <h2 class="text-xl font-black text-cyan-400">🎨 محرر Embed & Webhook المباشر</h2>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">🔗 رابط الويبهوك (Webhook URL) — اختياري للإرسال المباشر</label>
+            <input id="emb-wh" type="url" placeholder="https://discord.com/api/webhooks/..." dir="ltr" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-xs text-white focus:border-cyan-400 focus:outline-none">
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">🤖 اسم البوت</label>
+              <input id="emb-botname" type="text" value="RIKO STORE" oninput="updateEmbedPreview()" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">🎨 لون الشريط الجانبي</label>
+              <input id="emb-color" type="color" value="#00E5FF" oninput="updateEmbedPreview()" class="w-full h-9 rounded-xl bg-slate-900 border border-white/15 cursor-pointer">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">📌 العنوان (Title)</label>
+            <input id="emb-title" type="text" value="👑 〖 إعلان رسمي من ريكو ستور 〗" oninput="updateEmbedPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">📝 الوصف (Description)</label>
+            <textarea id="emb-desc" rows="5" oninput="updateEmbedPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">مرحباً بكم في سيرفر ريكو ستور! 🚀
+• أقوى الأدوات المجانية والمدفوعة للبيسي وديسكورد.
+• الدفع عبر Nitro Gift أو Server Boosts!</textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">🖼️ رابط صورة البانر (Image URL)</label>
+              <input id="emb-img" type="url" placeholder="https://..." dir="ltr" oninput="updateEmbedPreview()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">🔖 النص السفلي (Footer)</label>
+              <input id="emb-footer" type="text" value="RIKO STORE | جميع الحقوق محفوظة" oninput="updateEmbedPreview()" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs text-white">
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="sendWebhookEmbed()" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition">🚀 إرسال مباشرة لسيرفرك</button>
+            <button onclick="copyEmbedJson()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-xs border border-cyan-500/30 transition">📋 نسخ كود JSON</button>
+          </div>
+          <div id="emb-status" class="text-xs font-bold hidden"></div>
+        </div>
+
+        <!-- Live Discord Preview -->
+        <div class="discord-bg rounded-2xl p-5 border border-white/10 flex flex-col">
+          <div class="text-xs text-slate-400 font-bold mb-4 flex items-center justify-between">
+            <span>👁️ معاينة حية مطابقة لديسكورد</span>
+            <span class="px-2 py-0.5 rounded bg-indigo-500 text-white text-[10px] font-black">APP</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <img src="assets/youtube_blue.jpg" class="w-10 h-10 rounded-full object-cover">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span id="prev-botname" class="font-bold text-white text-sm">RIKO STORE</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#5865F2] text-[10px] font-bold text-white">APP</span>
+                <span class="text-[11px] text-slate-400">اليوم 20:00</span>
+              </div>
+              <div id="prev-box" class="discord-embed rounded-md p-4 border-r-4" style="border-color: #00E5FF;">
+                <div id="prev-title" class="font-bold text-white text-base mb-1.5"></div>
+                <div id="prev-desc" class="text-slate-200 text-sm whitespace-pre-line leading-relaxed"></div>
+                <img id="prev-img" class="hidden mt-3 rounded-lg max-h-60 object-cover w-full">
+                <div id="prev-footer" class="text-[11px] text-slate-400 mt-3 pt-2 border-t border-white/5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOL 2: DISCORD AVATAR FRAME MAKER -->
+    <section id="panel-avatar" class="tool-panel hidden glass rounded-3xl p-6 md:p-8 neon-cyan">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="space-y-4">
+          <h2 class="text-xl font-black text-cyan-400">🖼️ صانع إطارات بروفايل ديسكورد (Neon Avatar Maker)</h2>
+          <p class="text-xs text-slate-300">ارفع صورتك واختر إطاراً نيونياً فخماً مع شارة R.K وحملها فوراً بصيغة PNG عالية الدقة (512x512)!</p>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">📂 اختر صورة البروفايل من جهازك</label>
+            <input id="av-upload" type="file" accept="image/*" onchange="handleAvatarUpload(event)" class="w-full text-xs text-slate-300 file:ml-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-cyan-500 file:text-slate-950 file:font-black cursor-pointer bg-slate-900 rounded-xl p-2 border border-white/10">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">🎨 اختر ستايل الإطار النيوني</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button onclick="setFrameStyle('#00E5FF', '#3B82F6')" class="py-2 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-300 text-xs font-bold">⚡ RIKO نيون</button>
+              <button onclick="setFrameStyle('#E50914', '#F97316')" class="py-2 rounded-xl bg-red-500/20 border border-red-500 text-red-300 text-xs font-bold">🔥 أحمر ناري</button>
+              <button onclick="setFrameStyle('#FACC15', '#D97706')" class="py-2 rounded-xl bg-yellow-500/20 border border-yellow-400 text-yellow-300 text-xs font-bold">👑 ذهبي VIP</button>
+              <button onclick="setFrameStyle('#EC4899', '#A855F7')" class="py-2 rounded-xl bg-pink-500/20 border border-pink-400 text-pink-300 text-xs font-bold">🚀 بوستر</button>
+              <button onclick="setFrameStyle('#10B981', '#06B6D4')" class="py-2 rounded-xl bg-emerald-500/20 border border-emerald-400 text-emerald-300 text-xs font-bold">💚 أخضر سايبر</button>
+              <button onclick="setFrameStyle('#FFFFFF', '#94A3B8')" class="py-2 rounded-xl bg-white/10 border border-white/40 text-white text-xs font-bold">❄️ ثلجي</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1.5">🏷️ نص الشارة السفلية (اختياري)</label>
+            <input id="av-badge" type="text" value="R.K VIP" oninput="drawAvatarCanvas()" maxlength="14" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+          </div>
+
+          <button onclick="downloadAvatar()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black text-sm shadow-xl transition">
+            📥 تحميل صورة البروفايل (PNG 512x512)
+          </button>
+        </div>
+
+        <div class="flex flex-col items-center justify-center p-6 bg-slate-950/70 rounded-2xl border border-white/10">
+          <canvas id="avatar-canvas" width="512" height="512" class="w-72 h-72 md:w-80 md:h-80 rounded-2xl"></canvas>
+          <span class="text-xs text-slate-400 mt-3">خلفية شفافة بالكامل جاهزة لديسكورد ✨</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOL 3: SERVER DECORATOR & TEMPLATES -->
+    <section id="panel-decorator" class="tool-panel hidden glass rounded-3xl p-6 md:p-8 neon-cyan space-y-6">
+      <div>
+        <h2 class="text-xl font-black text-cyan-400 mb-2">✨ مزخرف أسماء الرومات والرتب الفوري</h2>
+        <input id="dec-input" type="text" value="الشات العام" oninput="generateDecorations()" placeholder="اكتب اسم الروم أو الرتبة هنا..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-cyan-500/30 text-white text-base font-bold focus:outline-none">
+        <div id="dec-results" class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"></div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6">
+        <h3 class="text-lg font-black text-white mb-4">📦 قوالب سيرفرات جاهزة للنسخ بضغطة زر</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/10">
+            <div class="font-black text-cyan-400 mb-2">🛍️ قالب متجر رسمي</div>
+            <pre id="tpl-store" class="text-xs text-slate-300 whitespace-pre-wrap font-sans leading-relaxed">╭━━━━・📌・مـعـلـومـات الـمـتـجـر・━━━━╮
+〢📢・الإعـلانـات-الـرسـمـيـة
+〢📜・قـوانـيـن-الـمـتـجـر
+〢💎・الأسـعـار-والـنـيـتـرو
+〢⭐・تـقـيـيـمـات-الـعـمـلاء
+╭━━━━・🎟️・الـتـذاكـر・━━━━╮
+〢🛒・فـتـح-تـذكـرة-شـراء
+〢🎧・فـتـح-تـذكـرة-دعـم</pre>
+            <button onclick="copyText('tpl-store')" class="mt-3 w-full py-2 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs font-bold hover:bg-cyan-500/30">📋 نسخ القالب</button>
+          </div>
+
+          <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/10">
+            <div class="font-black text-purple-400 mb-2">🎮 قالب سيرفر جيمنج و FiveM</div>
+            <pre id="tpl-gaming" class="text-xs text-slate-300 whitespace-pre-wrap font-sans leading-relaxed">╭━━━━・🎮・قـسـم الألـعـاب・━━━━╮
+〢🔥・شـات-الـجـيـمـرز
+〢🚗・مـودات-فـايـف-إم
+〢⚡・تـسـريـع-الـفـريـمـات
+〢🎥・لـقـطـات-ومـقـاطـع
+🔊・اسـكـواد 1 [4/4]
+🔊・غـرفـة الـبـطـولات</pre>
+            <button onclick="copyText('tpl-gaming')" class="mt-3 w-full py-2 rounded-lg bg-purple-500/20 text-purple-300 text-xs font-bold hover:bg-purple-500/30">📋 نسخ القالب</button>
+          </div>
+
+          <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/10">
+            <div class="font-black text-red-400 mb-2">📺 قالب يوتيوبرز وصناع محتوى</div>
+            <pre id="tpl-yt" class="text-xs text-slate-300 whitespace-pre-wrap font-sans leading-relaxed">╭━━━━・🎬・صـنـاع الـمـحـتـوى・━━━━╮
+〢📺・فـيـديـوهـات-الـيـوتـيـوب
+〢🔴・الـبـثـوث-الـمـبـاشـرة
+〢🎨・تـصـامـيـم-ثـامـبـنـيـل
+〢💬・تـبـادل-خـبـرات-الـمـونـتـاج
+👑〢أسـطـورة الـيـوتـيـوب
+💎〢يـوتـيـوبـر مـاسـي</pre>
+            <button onclick="copyText('tpl-yt')" class="mt-3 w-full py-2 rounded-lg bg-red-500/20 text-red-300 text-xs font-bold hover:bg-red-500/30">📋 نسخ القالب</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOL 4: DISCORD SOUNDBOARD TRIMMER -->
+    <section id="panel-soundboard" class="tool-panel hidden glass rounded-3xl p-6 md:p-8 neon-cyan">
+      <h2 class="text-xl font-black text-cyan-400 mb-2">🎙️ قاص ومجهز أصوات Discord Soundboard (تحت 5 ثوانٍ)</h2>
+      <p class="text-xs text-slate-300 mb-5">ارفع أي ملف صوتي، اختر ثانية البداية والمدة (حد ديسكورد الرسمي 5 ثوانٍ)، واضبط قوة الصوت ثم حمّله جاهزاً فوراً!</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <input id="sb-file" type="file" accept="audio/*" onchange="loadSoundboardFile(event)" class="w-full text-xs text-slate-300 file:ml-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-purple-500 file:text-white file:font-black cursor-pointer bg-slate-900 rounded-xl p-2 border border-white/10">
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">⏱️ البداية (ثانية)</label>
+              <input id="sb-start" type="number" step="0.1" min="0" value="0" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">⏳ المدة (1-5 ث)</label>
+              <input id="sb-dur" type="number" step="0.1" min="0.5" max="5" value="4.5" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">🔊 رفع الصوت %</label>
+              <input id="sb-gain" type="number" min="50" max="250" value="120" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-sm text-white">
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button onclick="previewSoundClip()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-xs border border-cyan-500/30">▶️ استماع للمقطع</button>
+            <button onclick="exportSoundWav()" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 text-white font-black text-xs">📥 تحميل WAV لـ Soundboard</button>
+          </div>
+          <div id="sb-status" class="text-xs text-emerald-400 font-bold"></div>
+        </div>
+        <div class="bg-slate-950/70 rounded-2xl p-6 border border-white/10 flex flex-col justify-center text-xs text-slate-400 space-y-2">
+          <div class="text-white font-bold text-sm">📌 شروط Discord Soundboard الرسمية:</div>
+          <div>• الحد الأقصى للمدة: <span class="text-cyan-400 font-bold">5 ثوانٍ</span></div>
+          <div>• الحد الأقصى للحجم: <span class="text-cyan-400 font-bold">512 KB</span></div>
+          <div>• تعمل الأداة بالكامل داخل جهازك بدون رفع ملفاتك لأي سيرفر خارجي! 🔒</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="py-6 text-center text-xs text-slate-500 border-t border-white/10 glass">
+    RIKO STORE TOOLS &copy; 2026 • يعمل 24/7 على GitHub Pages
+  </footer>
+
+  <script>
+    // ---------- TAB SWITCHER ----------
+    function switchTool(key) {
+      document.querySelectorAll('.tool-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById('panel-' + key).classList.remove('hidden');
+      document.querySelectorAll('.tool-tab').forEach(t => {
+        t.classList.remove('tab-active');
+        t.classList.add('glass', 'text-slate-300');
+      });
+      const active = document.getElementById('tab-' + key);
+      active.classList.add('tab-active');
+      active.classList.remove('glass', 'text-slate-300');
+    }
+
+    // ---------- TOOL 1: EMBED BUILDER ----------
+    function updateEmbedPreview() {
+      const botname = document.getElementById('emb-botname').value || 'RIKO STORE';
+      const color = document.getElementById('emb-color').value;
+      const title = document.getElementById('emb-title').value;
+      const desc = document.getElementById('emb-desc').value;
+      const img = document.getElementById('emb-img').value.trim();
+      const footer = document.getElementById('emb-footer').value;
+
+      document.getElementById('prev-botname').textContent = botname;
+      document.getElementById('prev-box').style.borderColor = color;
+      document.getElementById('prev-title').textContent = title;
+      document.getElementById('prev-desc').textContent = desc;
+      document.getElementById('prev-footer').textContent = footer;
+
+      const imgEl = document.getElementById('prev-img');
+      if (img) { imgEl.src = img; imgEl.classList.remove('hidden'); }
+      else { imgEl.classList.add('hidden'); }
+    }
+
+    function getEmbedPayload() {
+      const colorHex = document.getElementById('emb-color').value.replace('#', '');
+      const emb = {
+        title: document.getElementById('emb-title').value,
+        description: document.getElementById('emb-desc').value,
+        color: parseInt(colorHex, 16)
+      };
+      const img = document.getElementById('emb-img').value.trim();
+      if (img) emb.image = { url: img };
+      const footer = document.getElementById('emb-footer').value.trim();
+      if (footer) emb.footer = { text: footer };
+      return {
+        username: document.getElementById('emb-botname').value || 'RIKO STORE',
+        embeds: [emb]
+      };
+    }
+
+    async function sendWebhookEmbed() {
+      const url = document.getElementById('emb-wh').value.trim();
+      const st = document.getElementById('emb-status');
+      if (!url.startsWith('https://discord.com/api/webhooks/') && !url.startsWith('https://discordapp.com/api/webhooks/')) {
+        st.textContent = '❌ يرجى وضع رابط Webhook ديسكورد صحيح!';
+        st.className = 'text-xs font-bold text-red-400';
+        return;
+      }
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(getEmbedPayload())
+        });
+        if (res.ok) {
+          st.textContent = '✅ تم إرسال رسالة الـ Embed إلى سيرفر ديسكورد بنجاح!';
+          st.className = 'text-xs font-bold text-emerald-400';
+        } else {
+          st.textContent = '❌ فشل الإرسال — تحقق من صلاحية رابط الويبهوك.';
+          st.className = 'text-xs font-bold text-red-400';
+        }
+      } catch (e) {
+        st.textContent = '❌ خطأ في الاتصال: ' + e.message;
+        st.className = 'text-xs font-bold text-red-400';
+      }
+    }
+
+    function copyEmbedJson() {
+      navigator.clipboard.writeText(JSON.stringify(getEmbedPayload(), null, 2));
+      alert('✅ تم نسخ كود الـ JSON بنجاح!');
+    }
+    updateEmbedPreview();
+
+    // ---------- TOOL 2: AVATAR FRAME MAKER ----------
+    let avatarImg = new Image();
+    avatarImg.crossOrigin = "anonymous";
+    avatarImg.src = "assets/youtube_blue.jpg";
+    let frameCol1 = '#00E5FF', frameCol2 = '#3B82F6';
+    avatarImg.onload = () => drawAvatarCanvas();
+
+    function handleAvatarUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        avatarImg = new Image();
+        avatarImg.onload = () => drawAvatarCanvas();
+        avatarImg.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setFrameStyle(c1, c2) {
+      frameCol1 = c1; frameCol2 = c2;
+      drawAvatarCanvas();
+    }
+
+    function drawAvatarCanvas() {
+      const c = document.getElementById('avatar-canvas');
+      const ctx = c.getContext('2d');
+      ctx.clearRect(0, 0, 512, 512);
+
+      // Outer Glow Ring
+      const grad = ctx.createLinearGradient(0, 0, 512, 512);
+      grad.addColorStop(0, frameCol1);
+      grad.addColorStop(1, frameCol2);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(256, 256, 228, 0, Math.PI * 2);
+      ctx.shadowColor = frameCol1;
+      ctx.shadowBlur = 28;
+      ctx.lineWidth = 22;
+      ctx.strokeStyle = grad;
+      ctx.stroke();
+      ctx.restore();
+
+      // Clipped Avatar Image
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(256, 256, 212, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      const s = Math.min(avatarImg.width, avatarImg.height);
+      const sx = (avatarImg.width - s) / 2;
+      const sy = (avatarImg.height - s) / 2;
+      ctx.drawImage(avatarImg, sx, sy, s, s, 44, 44, 424, 424);
+      ctx.restore();
+
+      // Inner Crisp White Ring
+      ctx.beginPath();
+      ctx.arc(256, 256, 212, 0, Math.PI * 2);
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+      ctx.stroke();
+
+      // Bottom Badge Pill
+      const badge = document.getElementById('av-badge').value.trim();
+      if (badge) {
+        ctx.save();
+        ctx.fillStyle = '#090D16';
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.roundRect(146, 420, 220, 54, 27);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '900 26px Cairo, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(badge, 256, 448);
+        ctx.restore();
+      }
+    }
+
+    function downloadAvatar() {
+      const c = document.getElementById('avatar-canvas');
+      const a = document.createElement('a');
+      a.download = 'RIKO_Avatar_Frame.png';
+      a.href = c.toDataURL('image/png');
+      a.click();
+    }
+
+    // ---------- TOOL 3: DECORATOR ----------
+    function stretchArabic(txt) {
+      return txt.replace(/([بتثجحخسشصضطظعغفقكلمنهي])(?=[اأإآبتثجحخدذرزسشصضطظعغفقكلمنهوىي])/g, '$1ـ');
+    }
+    function generateDecorations() {
+      const raw = document.getElementById('dec-input').value.trim() || 'ريـكـو سـتـور';
+      const stretched = stretchArabic(raw);
+      const slug = stretched.replace(/\s+/g, '-');
+      const styles = [
+        `〢💎・${slug}`,
+        `╭━━━━・🔥・${stretched}・━━━━╮`,
+        `『 𝐑.𝐊 』${raw}`,
+        `〔 👑 ${stretched} 〕`,
+        `⚡┆${slug}`,
+        `★彡 ${raw} 彡★`
+      ];
+      document.getElementById('dec-results').innerHTML = styles.map(s => `
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-white/10">
+          <span class="font-bold text-sm text-white">${s}</span>
+          <button onclick="navigator.clipboard.writeText('${s.replace(/'/g, "\\'")}'); this.textContent='✅ نُسخ';" class="px-3 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs font-bold">نسخ</button>
+        </div>
+      `).join('');
+    }
+    function copyText(id) {
+      navigator.clipboard.writeText(document.getElementById(id).textContent);
+      alert('✅ تم نسخ القالب بنجاح!');
+    }
+    generateDecorations();
+
+    // ---------- TOOL 4: SOUNDBOARD AUDIO TRIMMER ----------
+    let audioCtx = null, decodedBuf = null;
+    async function loadSoundboardFile(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      document.getElementById('sb-status').textContent = '⏳ جارِ قراءة الملف الصوتي...';
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const arr = await f.arrayBuffer();
+      decodedBuf = await audioCtx.decodeAudioData(arr);
+      document.getElementById('sb-status').textContent = `✅ تم تحميل الصوت (المدة الأصلية: ${decodedBuf.duration.toFixed(1)} ثانية). جاهز للقص!`;
+    }
+
+    function previewSoundClip() {
+      if (!decodedBuf) return alert('اختر ملفاً صوتياً أولاً!');
+      const start = parseFloat(document.getElementById('sb-start').value) || 0;
+      const dur = Math.min(5, parseFloat(document.getElementById('sb-dur').value) || 4);
+      const gainVal = (parseFloat(document.getElementById('sb-gain').value) || 100) / 100;
+      const src = audioCtx.createBufferSource();
+      const g = audioCtx.createGain();
+      g.gain.value = gainVal;
+      src.buffer = decodedBuf;
+      src.connect(g); g.connect(audioCtx.destination);
+      src.start(0, start, dur);
+    }
+
+    function exportSoundWav() {
+      if (!decodedBuf) return alert('اختر ملفاً صوتياً أولاً!');
+      const start = parseFloat(document.getElementById('sb-start').value) || 0;
+      const dur = Math.min(5, parseFloat(document.getElementById('sb-dur').value) || 4);
+      const gainVal = (parseFloat(document.getElementById('sb-gain').value) || 100) / 100;
+      const sr = 22050; // Compact for Discord 512KB limit!
+      const len = Math.floor(dur * sr);
+      const offCtx = new OfflineAudioContext(1, len, sr);
+      const src = offCtx.createBufferSource();
+      const g = offCtx.createGain();
+      g.gain.value = gainVal;
+      src.buffer = decodedBuf;
+      src.connect(g); g.connect(offCtx.destination);
+      src.start(0, start, dur);
+      offCtx.startRendering().then(rendered => {
+        const wavBlob = bufferToWav(rendered);
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(wavBlob);
+        a.download = 'RIKO_Soundboard_Clip.wav';
+        a.click();
+        document.getElementById('sb-status').textContent = `✅ تم التصدير بنجاح! الحجم: ${(wavBlob.size/1024).toFixed(0)} KB — جاهز للرفع في ديسكورد!`;
+      });
+    }
+
+    function bufferToWav(abuffer) {
+      const numOfChan = abuffer.numberOfChannels, length = abuffer.length * numOfChan * 2 + 44;
+      const buffer = new ArrayBuffer(length), view = new DataView(buffer);
+      let pos = 0;
+      const setUint16 = d => { view.setUint16(pos, d, true); pos += 2; };
+      const setUint32 = d => { view.setUint32(pos, d, true); pos += 4; };
+      setUint32(0x46464952); setUint32(length - 8); setUint32(0x45564157);
+      setUint32(0x20746d66); setUint32(16); setUint16(1); setUint16(numOfChan);
+      setUint32(abuffer.sampleRate); setUint32(abuffer.sampleRate * 2 * numOfChan);
+      setUint16(numOfChan * 2); setUint16(16); setUint32(0x61746164); setUint32(length - pos - 4);
+      const chan = abuffer.getChannelData(0);
+      for (let i = 0; i < abuffer.length; i++) {
+        let s = Math.max(-1, Math.min(1, chan[i]));
+        view.setInt16(pos, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+        pos += 2;
+      }
+      return new Blob([buffer], { type: 'audio/wav' });
+    }
+  </script>
+</body>
+</html>
